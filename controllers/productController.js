@@ -1,9 +1,13 @@
 const Product = require('../models/Product');
-
+const Category = require('../models/Category');
 // Create a new product
 exports.createProduct = async (req, res) => {
     try {
         const { name, description, price, category, stock } = req.body;
+
+        // Validate category
+        const categoryExists = await Category.findById(category);
+        if (!categoryExists) return res.status(404).json({ message: 'Category not found' });
 
         const product = new Product({ name, description, price, category, stock });
         await product.save();
@@ -13,6 +17,7 @@ exports.createProduct = async (req, res) => {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
+
 
 // Get all products
 exports.getProducts = async (req, res) => {
