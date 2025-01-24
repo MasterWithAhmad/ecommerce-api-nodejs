@@ -1,0 +1,234 @@
+Authentication Endpoints
+
+[
+    {
+        "method": "POST",
+        "endpoint": "/api/auth/register",
+        "description": "Register a new user",
+        "body": {
+            "name": "User Name",
+            "email": "user@example.com",
+            "password": "password123"
+        }
+    },
+    {
+        "method": "POST",
+        "endpoint": "/api/auth/login",
+        "description": "Login an existing user",
+        "body": {
+            "email": "user@example.com",
+            "password": "password123"
+        }
+    },
+    {
+        "method": "PUT",
+        "endpoint": "/api/auth/promote",
+        "description": "Promote a user to admin (Admin only)",
+        "headers": {
+            "Authorization": "Bearer <admin-token>"
+        },
+        "body": {
+            "userId": "<user-id>"
+        }
+    }
+]
+
+
+---
+
+Product Endpoints
+
+[
+    {
+        "method": "POST",
+        "endpoint": "/api/products",
+        "description": "Create a new product (Admin only)",
+        "headers": {
+            "Authorization": "Bearer <admin-token>"
+        },
+        "body": {
+            "name": "Product Name",
+            "description": "Product Description",
+            "price": 99.99,
+            "category": "<category-id>",
+            "stock": 10
+        }
+    },
+    {
+        "method": "GET",
+        "endpoint": "/api/products",
+        "description": "Fetch all products with optional search",
+        "query": {
+            "query": "Optional search query"
+        }
+    },
+    {
+        "method": "GET",
+        "endpoint": "/api/products/:id",
+        "description": "Fetch a product by its ID"
+    },
+    {
+        "method": "PUT",
+        "endpoint": "/api/products/:id",
+        "description": "Update an existing product (Admin only)",
+        "headers": {
+            "Authorization": "Bearer <admin-token>"
+        },
+        "body": {
+            "name": "Updated Product Name",
+            "price": 199.99
+        }
+    },
+    {
+        "method": "DELETE",
+        "endpoint": "/api/products/:id",
+        "description": "Delete a product (Admin only)",
+        "headers": {
+            "Authorization": "Bearer <admin-token>"
+        }
+    },
+    {
+        "method": "GET",
+        "endpoint": "/api/products/search",
+        "description": "Search products by name or description",
+        "query": {
+            "query": "Search term"
+        }
+    }
+]
+
+
+---
+
+Category Endpoints
+
+[
+    {
+        "method": "POST",
+        "endpoint": "/api/categories",
+        "description": "Create a new category (Admin only)",
+        "headers": {
+            "Authorization": "Bearer <admin-token>"
+        },
+        "body": {
+            "name": "Category Name"
+        }
+    },
+    {
+        "method": "GET",
+        "endpoint": "/api/categories",
+        "description": "Fetch all categories"
+    },
+    {
+        "method": "PUT",
+        "endpoint": "/api/categories/:id",
+        "description": "Update an existing category (Admin only)",
+        "headers": {
+            "Authorization": "Bearer <admin-token>"
+        },
+        "body": {
+            "name": "Updated Category Name"
+        }
+    },
+    {
+        "method": "DELETE",
+        "endpoint": "/api/categories/:id",
+        "description": "Delete a category (Admin only)",
+        "headers": {
+            "Authorization": "Bearer <admin-token>"
+        }
+    }
+]
+
+
+---
+
+Cart Endpoints
+
+[
+    {
+        "method": "POST",
+        "endpoint": "/api/cart",
+        "description": "Add an item to the cart",
+        "headers": {
+            "Authorization": "Bearer <user-token>"
+        },
+        "body": {
+            "productId": "<product-id>",
+            "quantity": 2
+        }
+    },
+    {
+        "method": "GET",
+        "endpoint": "/api/cart",
+        "description": "Fetch the user's cart",
+        "headers": {
+            "Authorization": "Bearer <user-token>"
+        }
+    },
+    {
+        "method": "PUT",
+        "endpoint": "/api/cart",
+        "description": "Update an item in the cart",
+        "headers": {
+            "Authorization": "Bearer <user-token>"
+        },
+        "body": {
+            "productId": "<product-id>",
+            "quantity": 5
+        }
+    },
+    {
+        "method": "DELETE",
+        "endpoint": "/api/cart/:productId",
+        "description": "Remove an item from the cart",
+        "headers": {
+            "Authorization": "Bearer <user-token>"
+        }
+    }
+]
+
+
+---
+
+Order Endpoints
+
+[
+    {
+        "method": "POST",
+        "endpoint": "/api/orders",
+        "description": "Place an order",
+        "headers": {
+            "Authorization": "Bearer <user-token>"
+        }
+    },
+    {
+        "method": "GET",
+        "endpoint": "/api/orders",
+        "description": "Fetch the user's orders",
+        "headers": {
+            "Authorization": "Bearer <user-token>"
+        }
+    },
+    {
+        "method": "GET",
+        "endpoint": "/api/orders/all",
+        "description": "Fetch all orders (Admin only)",
+        "headers": {
+            "Authorization": "Bearer <admin-token>"
+        }
+    },
+    {
+        "method": "PUT",
+        "endpoint": "/api/orders/status",
+        "description": "Update the status of an order (Admin only)",
+        "headers": {
+            "Authorization": "Bearer <admin-token>"
+        },
+        "body": {
+            "orderId": "<order-id>",
+            "status": "shipped"
+        }
+    }
+]
+
